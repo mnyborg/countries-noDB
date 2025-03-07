@@ -1,4 +1,3 @@
-CREATE DATABASE IF NOT EXISTS worldcountries;
 USE worldcountries;
 
 DROP TABLE IF EXISTS countries;
