@@ -1,35 +1,36 @@
 package kea.iabr.countries.repository;
 
 import kea.iabr.countries.model.Country;
-import kea.iabr.countries.model.CountryRowMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class CountryRepository {
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
+    private final List<Country> countries = new ArrayList<>();
 
-    private final JdbcTemplate jdbcTemplate;
-
-    public CountryRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public CountryRepository() {
+        // Simulerede dataindsætninger – normalt ville disse komme fra databasen
+        countries.add(new Country(1L, "Danmark"));
+        countries.add(new Country(2L, "Sverige"));
+        countries.add(new Country(3L, "Norge"));
+        countries.add(new Country(4L, "Tyskland"));
     }
 
     public List<Country> findAll() {
-        String sql = "SELECT * FROM countries";
-        return jdbcTemplate.query(sql, new CountryRowMapper());
+        return new ArrayList<>(countries); // Returnér en kopi for at undgå direkte ændringer
+    }
+
+    public void addCountry(Country country) {
+        countries.add(country);
+    }
+
+    public void removeCountry(long id) {
+        countries.removeIf(c -> c.getId() == id);
     }
 }
+
 
 
 
