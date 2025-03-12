@@ -16,6 +16,7 @@ public class CountryRepository {
         countries.add(new Country(2L, "Sverige"));
         countries.add(new Country(3L, "Norge"));
         countries.add(new Country(4L, "Tyskland"));
+        countries.add(new Country(4L, "Island"));
     }
 
     public List<Country> findAll() {
